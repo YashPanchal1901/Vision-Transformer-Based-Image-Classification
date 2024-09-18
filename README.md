@@ -1,6 +1,4 @@
-Here’s a template for your README file, including sections like project overview, setup, and how to generate the API key:
 
----
 
 # **Vision-Transformer-Based-Image-Classification**
 
