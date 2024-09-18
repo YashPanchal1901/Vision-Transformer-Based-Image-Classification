@@ -12,7 +12,7 @@ feature_extractor = ViTFeatureExtractor.from_pretrained(model_name)
 model = ViTForImageClassification.from_pretrained(model_name)
 
 # API key for the nutrition information
-api_key = '7dT5MrExu46cdcZXfYkyaQ==6ZqQQDMF3LOOdTgY'
+api_key = 'YOUR_API_KEY'
 
 
 def identify_image(image):
