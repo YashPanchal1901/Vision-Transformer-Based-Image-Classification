@@ -3,78 +3,108 @@
 # **Vision-Transformer-Based-Image-Classification**
 
 ## Overview
-**VisionX** is a Python-based image classification project utilizing Vision Transformers (ViT) from Hugging Face and PyTorch. This project demonstrates how state-of-the-art transformer models can classify images with high accuracy. The model is deployed as an API, allowing users to upload images and receive predictions.
+
+This Streamlit application identifies food items from uploaded images and provides their nutritional information using a pre-trained ViT model for image classification and the API Ninjas Nutrition API for retrieving detailed nutrition data.
 
 ## Features
-- Image classification using Vision Transformers.
-- Built with PyTorch and Hugging Face's `transformers` library.
-- API integration for real-time image classification.
+1. **Food Identification**:
+   - Upload an image of a food item.
+   - The app uses the `google/vit-base-patch16-224` Vision Transformer (ViT) model to classify the food item.
 
-## Setup Instructions
+2. **Nutritional Information**:
+   - The app retrieves nutritional information such as calories, fat, protein, and carbohydrates from the **API Ninjas Nutrition API**.
+   - Displays the information in a formatted table.
 
-### Prerequisites
-- Python 3.7+
-- Virtual Environment (optional but recommended)
+3. **Try the Model**:
+   - You can try the model [Project](vision-transformer-based-image-classification-pw44b9zyappdyhow.streamlit.app).
 
-### Installation
+## Dependencies
 
-1. **Clone the repository:**
-    ```bash
-    git clone https://github.com/your-username/VisionX.git
-    cd VisionX
-    ```
+Ensure the following Python libraries are installed:
+- `streamlit`
+- `Pillow`
+- `transformers`
+- `requests`
 
-2. **Create and activate a virtual environment (optional):**
-    ```bash
-    python -m venv venv
-    source venv/bin/activate  # On Windows: venv\Scripts\activate
-    ```
+Install them using:
+```bash
+pip install -r requirements.txt
+```
 
-3. **Install the required libraries:**
-    ```bash
-    pip install -r requirements.txt
-    ```
+## File Structure
+- **main.py**: The main script for the Streamlit app.
+- **secrets.toml**: A configuration file storing the API key.
 
-4. **Run the app:**
-    ```bash
-    python app.py
-    ```
+## Setup
 
-### API Key Setup
-This project requires an API key for authentication with external services or APIs. Follow these steps to generate and use the API key:
+1. **Install Python**: Use Python 3.8 or later.
 
-#### Step 1: Generate Your API Key
-1. Visit the [API provider's website](https://api-ninjas.com/api/nutrition) to create an account.
-2. Navigate to the **API Keys** section in your account settings.
-3. Click on **Generate New Key** and copy the generated key.
+2. **Install Dependencies**:
+   Install the required libraries as mentioned above.
 
-#### Step 2: Set the API Key in Your Environment
-1. Create a `.env` file in the project root directory.
-2. Add the following line to the `.env` file, replacing `YOUR_API_KEY` with the key you generated:
-    ```bash
-    API_KEY=YOUR_API_KEY
-    ```
+3. **API Key**:
+   - Obtain an API key from [API Ninjas](https://api-ninjas.com/).
+   - Save the key in your `.streamlit/secrets.toml` file:
+     ```
+     [secrets]
+     Ninja_API = "your_api_key_here"
+     ```
 
-3. The app will automatically load this key from the environment when running.
+4. **Run the App**:
+   Start the Streamlit application:
+   ```bash
+   streamlit run main.py
+   ```
 
-## Usage
+## How to Use
 
-1. **Run the API:**
-    Once the setup is complete, you can start the API by running the `app.py` script.
-    ```bash
-    python app.py
-    ```
+### Steps:
+1. **Upload an Image**:
+   - Click on the "Choose an image..." button and upload a food image (JPG format).
+   - The uploaded image will be displayed on the app.
 
-2. **Making a request:**
-    You can send an image file to the API and receive classification results. Below is an example using `curl`:
-    ```bash
-    curl -X POST -F "file=@path/to/image.jpg" http://localhost:5000/predict
-    ```
+2. **Food Identification**:
+   - The app identifies the food item using the Vision Transformer model.
+   - Displays the predicted food item name.
 
-3. **Response:**
-    The API will return a JSON object with the predicted class and confidence score.
+3. **Retrieve Nutrition Info**:
+   - Fetches detailed nutritional data for the identified food item using the API Ninjas Nutrition API.
+   - Displays the information in a tabular format.
+
+4. **Try the Model**:
+   - Click the "Try ViT on Hugging Face" link to explore the ViT model directly on [Hugging Face](https://huggingface.co/google/vit-base-patch16-224).
+
+## Code Snippet: Adding the Model Link
+To add the "Try ViT on Hugging Face" feature, include this at the end of your script:
+```python
+st.write("### Want to explore the model?")
+st.markdown("[Try ViT on Hugging Face](https://huggingface.co/google/vit-base-patch16-224)", unsafe_allow_html=True)
+```
+
+## Example Output
+
+### Identified Food
+- **Uploaded Image**: `Pizza.jpg`
+- **Predicted Food Item**: Pizza
+
+### Nutritional Table
+| Metric                | Value       | Metric              | Value       |
+|-----------------------|-------------|---------------------|-------------|
+| Calories              | 250 kcal    | Serving Size (g)    | 100 g       |
+| Total Fat (g)         | 9 g         | Saturated Fat (g)   | 3 g         |
+| Protein (g)           | 11 g        | Sodium (mg)         | 600 mg      |
+| Potassium (mg)        | 200 mg      | Cholesterol (mg)    | 30 mg       |
+| Total Carbohydrates (g)| 30 g       | Fiber (g)           | 2 g         |
+| Sugar (g)             | 4 g         |                     |             |
+
+## Troubleshooting
+1. **Image Not Identified**:
+   - Ensure the uploaded image is clear and properly formatted (JPG only).
+2. **Nutritional Information Missing**:
+   - If no information is found, ensure the identified food item is specific and available in the API database.
+3. **API Errors**:
+   - Verify the API key in the `secrets.toml` file.
+   - Check API limits if the app is heavily used.
 
 ## License
-This project is licensed under the MIT License.
-
----
+Distributed under the MIT License.
