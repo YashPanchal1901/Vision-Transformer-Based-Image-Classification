@@ -16,7 +16,7 @@ This Streamlit application identifies food items from uploaded images and provid
    - Displays the information in a formatted table.
 
 3. **Try the Model**:
-   - You can try the model [Project](vision-transformer-based-image-classification-pw44b9zyappdyhow.streamlit.app).
+   - You can try the model [Project](https://vision-transformer-based-image-classification-pw44b9zyappdyhow.streamlit.app/).
 
 ## Dependencies
 
