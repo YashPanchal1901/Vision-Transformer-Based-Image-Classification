@@ -6,17 +6,15 @@ import warnings
 
 warnings.filterwarnings('ignore')
 
-# Load the pre-trained Vision Transformer model and feature extractor
 model_name = "google/vit-base-patch16-224"
 feature_extractor = ViTFeatureExtractor.from_pretrained(model_name)
 model = ViTForImageClassification.from_pretrained(model_name)
 
-# API key for the nutrition information
-api_key = 'YOUR_API_KEY'
+api_key = st.secrets['Ninja_API']
 
 
 def identify_image(image):
-    """Identify the food item in the image."""
+  
     inputs = feature_extractor(images=image, return_tensors="pt")
     outputs = model(**inputs)
     logits = outputs.logits
@@ -27,7 +25,7 @@ def identify_image(image):
 
 
 def get_calories(food_name):
-    """Get the calorie information of the identified food item."""
+   
     api_url = 'https://api.api-ninjas.com/v1/nutrition?query={}'.format(food_name)
     response = requests.get(api_url, headers={'X-Api-Key': api_key})
     if response.status_code == requests.codes.ok:
@@ -38,7 +36,7 @@ def get_calories(food_name):
 
 
 def format_nutrition_info(nutrition_info):
-    """Format the nutritional information into an HTML table."""
+    
     if "Error" in nutrition_info:
         return f"Error: {nutrition_info['Error']} - {nutrition_info['Message']}"
 
